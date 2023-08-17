@@ -13,7 +13,7 @@ RUN zypper --non-interactive in --no-recommends git-core \
     rm -rf /var/log/* /var/cache/zypp
 
 # Setup our user
-RUN useradd -u 13042 -m blog; \
+RUN useradd -m blog; \
     echo 'blog ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers; \
     echo 'install: --no-format-executable' >> /etc/gemrc; \
     # Install last bundler version with ruby 2.5 support

@@ -1,8 +1,10 @@
 .PHONY: all build
 DOCKER_IMAGE_NAME ?= blog_build
+DOCKER_IMAGE_UID ?= 1000
+DOCKER_IMAGE_GID ?= 1000
 all:
 	docker build -t $(DOCKER_IMAGE_NAME) .
-	docker run --rm -v .:/home/blog/blog $(DOCKER_IMAGE_NAME) make build
+	docker run --rm -v .:/home/blog/blog --user $(DOCKER_IMAGE_UID):$(DOCKER_IMAGE_GID) $(DOCKER_IMAGE_NAME) make build
 build:
 	bundle config build.ffi --enable-system-libffi
 	bundle config build.nokogiri --use-system-libraries
