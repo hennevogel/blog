@@ -36,6 +36,6 @@ ENV LC_ALL C.UTF-8
 RUN bundle config build.ffi --enable-system-libffi; \
     bundle config build.nokogiri --use-system-libraries; \
     bundle config build.sassc --disable-march-tune-native; \
-    bundle install
+    bundle install --jobs=3 --retry=3
 
 CMD ["/bin/bash", "-l"]
