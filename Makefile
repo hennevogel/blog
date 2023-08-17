@@ -2,7 +2,7 @@
 DOCKER_IMAGE_NAME ?= blog_build
 all:
 	docker build -t $(DOCKER_IMAGE_NAME) .
-	docker run --rm -it -v .:/home/blog/blog $(DOCKER_IMAGE_NAME) make build
+	docker run --rm -v .:/home/blog/blog $(DOCKER_IMAGE_NAME) make build
 build:
 	bundle config build.ffi --enable-system-libffi
 	bundle config build.nokogiri --use-system-libraries
