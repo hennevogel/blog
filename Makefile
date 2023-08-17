@@ -1,8 +1,8 @@
 .PHONY: all build
+DOCKER_IMAGE_NAME ?= blog_build
 all:
-	docker build -t blog_build container
-	docker run --rm -it -v .:/home/hvogel/blog blog_build make build
+	docker build -t $(DOCKER_IMAGE_NAME) container
+	docker run --rm -it -v .:/home/blog/blog blog_build make build
 build:
-	sudo gem install bundler -v 2.3.26 # last bundler version with ruby 2.5 support
 	bundle install
 	jekyll build
