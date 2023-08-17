@@ -4,7 +4,11 @@ RUN zypper --non-interactive in --no-recommends git-core \
                                                 ruby-devel \
                                                 gcc-c++ \
                                                 sudo \
-                                                nodejs18 && \
+                                                nodejs18 \
+                                                libffi-devel \
+                                                zlib-devel \
+                                                libxml2-devel \
+                                                libxslt-devel && \
     zypper clean; \
     rm -rf /var/log/* /var/cache/zypp
 
@@ -23,9 +27,15 @@ ADD --chown=blog:users Gemfile.lock /home/blog/blog/Gemfile.lock
 
 USER blog
 WORKDIR /home/blog/blog
-ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=1
+# We always want to build for our platform instead of using precompiled gems
+ENV BUNDLE_FORCE_RUBY_PLATFORM=true
 ENV LC_ALL C.UTF-8
 
-RUN bundle install
+# Configure and install our bundle
+# TODO: keep in sync with Makefile
+RUN bundle config build.ffi --enable-system-libffi; \
+    bundle config build.nokogiri --use-system-libraries; \
+    bundle config build.sassc --disable-march-tune-native; \
+    bundle install
 
 CMD ["/bin/bash", "-l"]
