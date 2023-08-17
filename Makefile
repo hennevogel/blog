@@ -4,5 +4,8 @@ all:
 	docker build -t $(DOCKER_IMAGE_NAME) .
 	docker run --rm -it -v .:/home/blog/blog $(DOCKER_IMAGE_NAME) make build
 build:
+	bundle config build.ffi --enable-system-libffi
+	bundle config build.nokogiri --use-system-libraries
+	bundle config build.sassc --disable-march-tune-native
 	bundle install
 	jekyll build
