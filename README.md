@@ -1,1 +1,1 @@
-# [hennevogel.de](http://hennevogel.de)
+# [copyleft.dev](https://copyleft.dev)
