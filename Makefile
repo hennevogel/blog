@@ -1,7 +1,7 @@
 .PHONY: all build
 DOCKER_IMAGE_NAME ?= blog_build
-DOCKER_IMAGE_UID ?= 1000
-DOCKER_IMAGE_GID ?= 1000
+DOCKER_IMAGE_UID ?= $(shell id -u)
+DOCKER_IMAGE_GID ?= $(shell id -g)
 all:
 	docker build -t $(DOCKER_IMAGE_NAME) .
 	docker run --rm -v .:/home/blog/blog --user $(DOCKER_IMAGE_UID):$(DOCKER_IMAGE_GID) $(DOCKER_IMAGE_NAME) make build
