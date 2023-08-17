@@ -18,8 +18,8 @@ RUN useradd -u 13042 -m blog; \
 # We copy the Gemfile to this intermediate build stage so it's checksum
 # changes and all the subsequent stages (a.k.a. the bundle install call below)
 # have to be rebuild.
-ADD --chown=blog:users ./Gemfile /home/blog/blog/Gemfile
-ADD --chown=blog:users ../Gemfile.lock /home/blog/blog/Gemfile.lock
+ADD --chown=blog:users Gemfile /home/blog/blog/Gemfile
+ADD --chown=blog:users Gemfile.lock /home/blog/blog/Gemfile.lock
 
 USER blog
 WORKDIR /home/blog/blog
