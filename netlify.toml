@@ -13,10 +13,15 @@
 # Production context: all deploys from the Production branch set in your site’s
 # deploy contexts will inherit these settings.
 [context.production]
-  command = "jekyll build"
+  command = "echo 'nothing'"
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
 [context.deploy-preview]
   command = "jekyll build --future"
 
+# This will redirect everything to copyleft.dev
+[[redirects]]
+from = "https://hennevogel.de/*"
+to = "https://copyleft.dev/:splat"
+status = 301
